@@ -1,0 +1,27 @@
+<div class="header">
+  <a [routerLink]="'/main'" class="logo">PROSTRANSTVO</a>
+  <div class="header-right">
+    <a class="active">Home</a>
+    <a [routerLink]="'/profile'">Profile</a>
+    <a (click)="logout()">Logout</a>
+  </div>
+</div>
+
+<form class="edit-form" (ngSubmit)="edit()">
+  <h1>LOT EDITION</h1>
+  <input type="text" placeholder="Name" name="name" [(ngModel)]="lot.name">
+  <input type="number" class="price" placeholder="Price" [(ngModel)]="lot.price" name="price">
+  <input type="file" (change)="onFileChanged($event)" multiple accept="image/png, image/jpeg">
+  <textarea type="text" class="description" style="resize: none" placeholder="Description"
+            [(ngModel)]="lot.description" name="description" autofocus></textarea>
+  <div *ngFor="let lotPicture of lot.picturesList">
+    <div (click)="addDeletingPicture(lotPicture.id)">DELETE PICTURE</div>
+    <div *ngIf="lotPicture">
+      <img [src]="lotPicture.image">
+    </div>
+  </div>
+  <button class="submit-button" type="submit">edit</button>
+</form>
+<button type="submit" class="close-lot-button" (click)="close()">Close lot</button>
+
+<button [routerLink]="'/main'">Cancel</button>

@@ -1,0 +1,93 @@
+<div class="body">
+  <div class="container">
+    <div class="header">
+      <div class="text-grid">
+        <a [routerLink]="'/main'" class="logo">PROSTRANSTVO</a></div>
+      <div class="header-right">
+        <a class="create" [routerLink]="'/create'">Create</a>
+        <a [routerLink]="'/profile'">Profile</a>
+        <a (click)="logout()">Logout</a>
+      </div>
+    </div>
+
+
+
+    <div class="buttons" *ngIf="isUserLots else allLots">
+      <ul>
+        <li class="resp-tab-item" aria-controls="tab_item-0" role="tab" (click)="showUserLots(false)">
+          <span>All lots</span>
+        </li>
+        <li class="resp-tab-item active" aria-controls="tab_item-1" role="tab" (click)="showUserLots(true)">
+          <span>My lots</span>
+        </li>
+      </ul>
+    </div>
+    <ng-template #allLots>
+      <ul>
+        <li class="resp-tab-item active" aria-controls="tab_item-0" role="tab" (click)="showUserLots(false)">
+          <span>All lots</span>
+        </li>
+        <li class="resp-tab-item" aria-controls="tab_item-1" role="tab" (click)="showUserLots(true)">
+          <span>My lots</span>
+        </li>
+      </ul>
+    </ng-template>
+
+    <div class="main-container">
+      <div class="filters">
+        <input placeholder="Lowest price" name="price" class="lock" [(ngModel)]="filter.lowestPrice"
+               type="number"
+               required="">
+        <input placeholder="Highest price" name="price" class="username" [(ngModel)]="filter.highestPrice"
+               type="number"
+               required="">
+      </div>
+
+
+      <div *ngIf="!isUserLots else userLotsTemplate">
+        <div class="lot-container" *ngFor="let lot of lots">
+          <div *ngIf="lot">
+            <div class="lot" [routerLink]="'/lotInfo/'+ lot.id">
+              <div class="images" *ngIf="lot.picturesList[0]">
+                <img class="image-title-wrap"[src]="lot.picturesList[0].image">
+              </div>
+              <div class="additional-info">
+                <div class="lot-name">{{lot.name}} </div>
+                <div class="lot-price">$ {{lot.price}}</div>
+                <div class="lot-date">{{getFormattedDate(lot.creationDate)}}</div>
+                <div class="lot-description">{{lot.description}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="pageable">
+          <div class="prev-page" (click)="getPage(pageNumber - 1, true)"><</div>
+          <div class="this-page">{{pageNumber + 1}}</div>
+          <div class="next-page" (click)="getPage(pageNumber + 1, false)">></div>
+        </div>
+      </div>
+
+      <ng-template #userLotsTemplate>
+        <div class="lot-container" *ngFor="let lot of userLots">
+          <div *ngIf="lot">
+            <div class="lot" [routerLink]="'/editLot/'+ lot.id">
+              <div class="lot-name">{{lot.name}} </div>
+              <div class="lot-price">{{lot.price}} </div>
+              <div class="lot-date">{{getFormattedDate(lot.creationDate)}}</div>
+              <div class="images" *ngIf="lot.picturesList[0]">
+                <img class="image-title-wrap"[src]="lot.picturesList[0].image">
+              </div>
+              <div class="lot-description">{{lot.description}}</div>
+            </div>
+            </div>
+          </div>
+        <div class="pageable">
+          <div class="prev-page" (click)="getUserPage(pageNumber - 1, true)"><</div>
+          <div class="this-page">{{pageNumber + 1}}</div>
+          <div class="next-page" (click)="getUserPage(pageNumber + 1, false)">></div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

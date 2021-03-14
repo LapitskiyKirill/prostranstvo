@@ -1,0 +1,25 @@
+<div class="header">
+  <a [routerLink]="'/main'" class="logo">PROSTRANSTVO</a>
+  <div class="header-right">
+    <a [routerLink]="'/main'">Home</a>
+    <a class="active">Profile</a>
+    <a (click)="logout()">Logout</a>
+  </div>
+</div>
+
+<form class="update-details-form" (ngSubmit)="updateDetails()">
+  <h1>User details update</h1>
+  <input type="text" placeholder="First name" name="first name" [(ngModel)]=user.firstname>
+  <input type="text" placeholder="Last name" name="last name" [(ngModel)]=user.lastname>
+  <input type="text" placeholder="Phone number" name="phone number" [(ngModel)]=user.phoneNumber>
+  <button class="submit-button" type="submit">Edit</button>
+
+</form>
+
+<form class="update-password-form" (ngSubmit)="changePassword()">
+  <h1>Password change</h1>
+  <input type="password" placeholder="Old password" name="old" [(ngModel)]=passwordChangeRequest.oldPassword>
+  <input type="password" placeholder="New password" name="new" [(ngModel)]=passwordChangeRequest.newPassword>
+  <button class="submit-button" type="submit">Change password</button>
+</form>
+<button [routerLink]="'/main'">Cancel</button>

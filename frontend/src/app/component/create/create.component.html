@@ -1,0 +1,46 @@
+<div class="body">
+  <div class="container">
+    <div class="header">
+      <div class="text-grid">
+        <a [routerLink]="'/main'" class="logo">PROSTRANSTVO</a></div>
+      <div class="header-right">
+        <a class="active" [routerLink]="'/main'">Home</a>
+        <a [routerLink]="'/profile'">Profile</a>
+        <a (click)="logout()">Logout</a>
+      </div>
+    </div>
+        <form class="create-form" (ngSubmit)="create()">
+          <h1>LOT CREATING</h1>
+          <label>
+            <input class="name" type="text" placeholder="Name" [(ngModel)]="name" name="name">
+          </label>
+          <label>
+            <input class="price" type="number" placeholder="Price" [(ngModel)]="price" name="Price">
+
+
+          </label>
+          <label>
+            <input type="file" class="inputFile" (change)="onFileChanged($event)" multiple accept="image/png, image/jpeg">
+            <div class="label-text"><div class="text">Add picture...</div></div>
+          </label>
+          <div class="images">
+            <div class="image" *ngFor="let lotPicture of imgUrls">
+              <div class="image-title-wrap" *ngIf="lotPicture">
+                <div class="deselect-picture"(click)="deselectPicture(lotPicture)">DELETE PICTURE</div>
+                <img [src]="lotPicture" class="image-title-wrap">
+              </div>
+            </div>
+          </div>
+
+
+          <textarea type="text" style="resize: none;" class="description" placeholder="Description"
+                    [(ngModel)]="description" name="description" autofocus></textarea>
+          <div class="control">
+            <button class="submit-button" type="submit">Create</button>
+            <button [routerLink]="'/main'">Cancel</button>
+          </div>
+        </form>
+
+      </div>
+
+</div>

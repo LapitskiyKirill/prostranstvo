@@ -1,0 +1,37 @@
+<div class="header">
+  <a [routerLink]="'/main'" class="logo">PROSTRANSTVO</a>
+  <div class="header-right">
+    <a class="active">Home</a>
+    <a [routerLink]="'/profile'">Profile</a>
+    <a (click)="logout()">Logout</a>
+  </div>
+</div>
+
+
+<div *ngIf="lot">
+  <div class="lot">
+    <div>{{lot.name}} </div>
+    <div>{{lot.price}} </div>
+    <div>{{getFormattedDate(lot.creationDate)}}</div>
+    <div *ngFor="let lotPicture of lot.picturesList">
+      <div *ngIf="lotPicture">
+        <img [src]="lotPicture.image">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="user-info">
+  <div>User info:</div>
+  <div>
+    {{lot.userDto.firstname}}
+  </div>
+  <div>
+    {{lot.userDto.lastname}}
+  </div>
+  <div>
+    {{lot.userDto.phoneNumber}}
+  </div>
+  <div>
+    {{lot.userDto.mail}}
+  </div>
+</div>

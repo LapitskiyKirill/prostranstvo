@@ -1,0 +1,54 @@
+<body>
+<br>
+    <form *ngIf="isAuth else registerForm" (ngSubmit)="authenticate()">
+      <div class="segment">
+        <h1>Sign In</h1>
+      </div>
+      <label>
+        <input type="text" placeholder="Username" [(ngModel)]="authUser.username" name="username" required=""/>
+      </label>
+      <label>
+        <input type="password" placeholder="Password" [(ngModel)]="authUser.password" name="password" required=""/>
+      </label>
+      <label class="label">
+        <div class="toggle">
+          <input class="toggle-state" type="checkbox" name="check" [(ngModel)]="authUser.rememberMe" />
+          <div class="indicator"></div>
+        </div>
+
+        <div *ngIf ="!authUser.rememberMe else active" class="label-text">Remember me</div>
+        <ng-template #active>
+          <div class="label-text active">Remember me</div>
+        </ng-template>
+
+      </label>
+      <button class="red" type="submit"><i class="icon ion-md-lock"></i>Log in</button>
+      <div class="change-form" (click)="showFormReg()">
+        <span>Create account</span>
+      </div>
+    </form>
+
+    <ng-template #registerForm>
+      <form (ngSubmit)="register()">
+        <div class="segment">
+          <h1>Sign Up</h1>
+        </div>
+        <label>
+          <input type="text" placeholder="Username" [(ngModel)]="registerUser.username" name="username" required=""/>
+        </label>
+        <label>
+          <input type="text" placeholder="Email Address" [(ngModel)]="registerUser.mail" name="mail" required=""/>
+        </label>
+        <label>
+          <input type="password" placeholder="Password" [(ngModel)]="registerUser.password" name="password" required=""/>
+        </label>
+        <label>
+          <input type="password" placeholder="Re-type password" [(ngModel)]="passwordConfirm" name="passwordConfirm" required=""/>
+        </label>
+        <button class="red" type="submit"><i class="icon ion-md-lock"></i>Sign Up</button>
+        <div class="change-form" (click)="showFormAuth()">
+          <span>Already have an account</span>
+        </div>
+      </form>
+    </ng-template>
+</body>
